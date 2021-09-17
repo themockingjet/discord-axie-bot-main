@@ -203,7 +203,7 @@ module.exports = new Command({
 
 			embed
 				.addFields(
-					{ name: '\u200b', value: '\u200b', inline: true },
+					{ name: '\u200b', value: '\u200b' },
 					// Stats
 					//{ name: 'Stats', value: `**Health**: ${axieStats.stats.hp}     **Speed**: ${axieStats.stats.speed}     **Skill**: ${axieStats.stats.skill}     **Morale**: ${axieStats.stats.morale}`}
 					{ 
