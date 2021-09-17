@@ -199,6 +199,8 @@ module.exports = new Command({
 				var endTime = getRelativeTime(+new Date(axAuction.endingTimestamp * 1000))
 				//console.log(startingPrice)
 				embed.addField('Price', `${startingPrice} ▶ ${endingPrice} 🕛 ${endTime}`, true )
+			} else {
+				embed.addField(`\u200B`, `\u200B` )
 			}
 
 			embed
