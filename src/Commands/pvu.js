@@ -2,47 +2,62 @@
 //
 //
 const Command = require("../Structures/Command.js");
-const fetch = require('node-fetch');
+const fix = require('../Functions/numLocaleString.js');
+const tokenModel = require('../Models/tokenSchema');
 
 module.exports = new Command({
 	name: "pvu",
 	description: "Plant vs Undead",
 	async run(message, args, client) {
-		if (args[1] && isNaN(parseFloat(args[1]))) {
+		
+		if (args.length <= 4) {
 
-			return message.channel.send("Invalid amount. Type `!pvu`, `!pvu <amount>` or `!pvu <amount> @ <price>`.")
+			if (args.length == 1) {
 
-		} else if (!args[1]) {
+				let result = await tokenModel.findOne({
+					tokenID: "plant-vs-undead-token"
+				})
+				message.reply(`\`PVU\` **1** => \`PHP\` **${fix.toDecimal(result.php)}**`);
 
-			fetch('https://api.coingecko.com/api/v3/simple/price?ids=plant-vs-undead-token&vs_currencies=php')
-			.then(res => res.json())
-			.then(body => message.reply(`\`PVU\` **1** => \`PHP\` **${Number(body['plant-vs-undead-token'].php).toLocaleString()}**`));
+			} else if (args.length == 2) {
+				/*
+				!pvu <amount>
+				*/	
+				let tokenNum = parseFloat(args[1].replace(/,/g, ''));
+				if(!isNaN(tokenNum)) {
+					
+					let result = await tokenModel.findOne({
+						tokenID: "plant-vs-undead-token"
+					})
+					
+					message.reply(`\`PVU\` **${tokenNum}** => \`PHP\` **${fix.toDecimal(tokenNum * result.php)}**`);
+				} else {
 
-		} else if (args[2] === "@" && !args[3]) {
+					return message.channel.send("Invalid command. Type `!pvu`, `!pvu <amount>` or `!pvu <amount> @ <price>`.");
+				}
 
-			return message.channel.send("Invalid command. Type `!pvu <amount> <@> <price>`.");
+			} else if (args.length == 4) {
+				/*
+				!pvu <amount> @ <price> 
+				*/
+				let tokenPrc = parseFloat(args[3].replace(/,/g, ''))
 
-		} else if (args[2] === "@" && !isNaN(parseFloat(args[3]))){
-			
-			let y = parseFloat(args[3]).toFixed(2);
-			let x = (y * args[1]).toFixed(2);
-			x = Number(x).toLocaleString();
-			message.reply(`\`PVU\` **${args[1]}** => \`PHP\` **${x}**`);
-			
-		} else if (!isNaN(parseFloat(args[1])) && !args[2]) {
-			
-			fetch('https://api.coingecko.com/api/v3/simple/price?ids=plant-vs-undead-token&vs_currencies=php')
-			.then(res => res.json())
-			.then(body => {
-				let x = (body['plant-vs-undead-token'].php.toFixed(2) * args[1]).toFixed(2);
-				x = Number(x).toLocaleString();
-				message.reply(`\`PVU\` **${args[1]}** => \`PHP\` **${x}**`);
-			});
+				if(!isNaN(tokenNum) && !isNaN(tokenPrc) && args[2] == '@') {
+					
+					message.reply(`\`PVU\` **${tokenNum}** => \`PHP\` **${fix.toDecimal(tokenNum * tokenPrc)}**`);
+				} else {
+
+					return message.channel.send("Invalid command. Type `!pvu`, `!pvu <amount>` or `!pvu <amount> @ <price>`.");
+				}
+
+			} else {
+
+				return message.channel.send("Invalid command. Type `!pvu`, `!pvu <amount>` or `!pvu <amount> @ <price>`.");
+			}
 
 		} else {
 
 			return message.channel.send("Invalid command. Type `!pvu`, `!pvu <amount>` or `!pvu <amount> @ <price>`.");
-
-		};
+		}
 	}
 });

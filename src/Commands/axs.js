@@ -2,48 +2,62 @@
 //
 //
 const Command = require("../Structures/Command.js");
-const fetch = require('node-fetch');
+const fix = require('../Functions/numLocaleString.js');
+const tokenModel = require('../Models/tokenSchema');
 
 module.exports = new Command({
 	name: "axs",
 	description: "Axie Infinity Shard",
 	async run(message, args, client) {
 
-		if (args[1] && isNaN(parseFloat(args[1]))) {
-			
-			return message.channel.send("Invalid amount. Type `!axs`, `!axs <amount>` or `!axs <amount> @ <price>`.");
-			
-		} else if (!args[1]) {
+		if (args.length <= 4) {
 
-			fetch('https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_currencies=php')
-			.then(res => res.json())
-			.then(body => message.reply(`\`AXS\` **1** => \`PHP\` **${Number(body['axie-infinity'].php).toLocaleString()}**`));
+			if (args.length == 1) {
 
-		} else if (args[2] === "@" && !args[3]) {
+				let result = await tokenModel.findOne({
+					tokenID: "axie-infinity"
+				})
+				message.reply(`\`AXS\` **1** => \`PHP\` **${fix.toDecimal(result.php)}**`);
 
-			return message.channel.send("Invalid command. Type `!axs <amount> <@> <price>`.");
+			} else if (args.length == 2) {
+				/*
+				!axs <amount>
+				*/	
+				let tokenNum = parseFloat(args[1].replace(/,/g, ''));
+				if(!isNaN(tokenNum)) {
+					
+					let result = await tokenModel.findOne({
+						tokenID: "axie-infinity"
+					})
+					
+					message.reply(`\`AXS\` **${tokenNum}** => \`PHP\` **${fix.toDecimal(tokenNum * result.php)}**`);
+				} else {
 
-		} else if (args[2] === "@" && !isNaN(parseFloat(args[3]))) {
+					return message.channel.send("Invalid command. Type `!axs`, `!axs <amount>` or `!axs <amount> @ <price>`.");
+				}
 
-			let y = parseFloat(args[3]).toFixed(2);
-			let x = (y * args[1]).toFixed(2);
-			x = Number(x).toLocaleString();
-			message.reply(`\`AXS\` **${args[1]}** => \`PHP\` **${x}**`);
-			
-		} else if (!isNaN(parseFloat(args[1])) && !args[2]) {
+			} else if (args.length == 4) {
+				/*
+				!axs <amount> @ <price> 
+				*/
+				let tokenPrc = parseFloat(args[3].replace(/,/g, ''))
 
-			fetch('https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_currencies=php')
-			.then(res => res.json())
-			.then(body => {
-				let x = (body['axie-infinity'].php * args[1]).toFixed(2);
-				x = Number(x).toLocaleString();
-				message.reply(`\`AXS\` **${args[1]}** => \`PHP\` **${x}**`);
-			});
+				if(!isNaN(tokenNum) && !isNaN(tokenPrc) && args[2] == '@') {
+					
+					message.reply(`\`AXS\` **${tokenNum}** => \`PHP\` **${fix.toDecimal(tokenNum * tokenPrc)}**`);
+				} else {
+
+					return message.channel.send("Invalid command. Type `!axs`, `!axs <amount>` or `!axs <amount> @ <price>`.");
+				}
+
+			} else {
+
+				return message.channel.send("Invalid command. Type `!axs`, `!axs <amount>` or `!axs <amount> @ <price>`.");
+			}
 
 		} else {
 
 			return message.channel.send("Invalid command. Type `!axs`, `!axs <amount>` or `!axs <amount> @ <price>`.");
-
-		};
+		}
 	}
 });

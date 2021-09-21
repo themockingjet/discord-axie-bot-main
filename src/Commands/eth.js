@@ -2,46 +2,62 @@
 //
 //
 const Command = require("../Structures/Command.js");
-const fetch = require('node-fetch');
+const fix = require('../Functions/numLocaleString.js');
+const tokenModel = require('../Models/tokenSchema');
 
 module.exports = new Command({
 	name: "eth",
 	description: "ETH",
 	async run(message, args, client) {
-		if (args[1] && isNaN(parseFloat(args[1]))) {
+		
+		if (args.length <= 4) {
 
-			return message.channel.send("Invalid amount. Type `!eth`, `!eth <amount>` or `!eth <amount> @ <price>`.");
+			if (args.length == 1) {
 
-		} else if (!args[1]) {
+				let result = await tokenModel.findOne({
+					tokenID: "ethereum"
+				})
+				message.reply(`\`ETH\` **1** => \`PHP\` **${fix.toDecimal(result.php)}**`);
 
-			fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=php')
-			.then(res => res.json())
-			.then(body => message.reply(`\`ETH\` **1** => \`PHP\` **${Number(body['ethereum'].php).toLocaleString()}**`));
+			} else if (args.length == 2) {
+				/*
+				!eth <amount>
+				*/	
+				let tokenNum = parseFloat(args[1].replace(/,/g, ''));
+				if(!isNaN(tokenNum)) {
+					
+					let result = await tokenModel.findOne({
+						tokenID: "ethereum"
+					})
+					
+					message.reply(`\`ETH\` **${tokenNum}** => \`PHP\` **${fix.toDecimal(tokenNum * result.php)}**`);
+				} else {
 
-		} else if (args[2] === "@" && !args[3]) {
+					return message.channel.send("Invalid command. Type `!eth`, `!eth <amount>` or `!eth <amount> @ <price>`.");
+				}
 
-			return message.channel.send("Invalid command. Type `!ETH <amount> <@> <price>`.");
+			} else if (args.length == 4) {
+				/*
+				!eth <amount> @ <price> 
+				*/
+				let tokenPrc = parseFloat(args[3].replace(/,/g, ''))
 
-		} else if (args[2] === "@" && !isNaN(parseFloat(args[3]))){
-			
-			let y = parseFloat(args[3]).toFixed(2);
-			let x = (y * args[1]).toFixed(2);
-			x = Number(x).toLocaleString();
-			message.reply(`\`ETH\` **${args[1]}** => \`PHP\` **${x}**`);
-			
-		} else if (!isNaN(parseFloat(args[1])) && !args[2]) {
-			
-			fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=php')
-			.then(res => res.json())
-			.then(body => {
-				let x = (body['ethereum'].php * args[1]).toFixed(2);
-				x = Number(x).toLocaleString();
-				message.reply(`\`ETH\` **${args[1]}** => \`PHP\` **${x}**`);
-			});
+				if(!isNaN(tokenNum) && !isNaN(tokenPrc) && args[2] == '@') {
+					
+					message.reply(`\`ETH\` **${tokenNum}** => \`PHP\` **${fix.toDecimal(tokenNum * tokenPrc)}**`);
+				} else {
+
+					return message.channel.send("Invalid command. Type `!eth`, `!eth <amount>` or `!eth <amount> @ <price>`.");
+				}
+
+			} else {
+
+				return message.channel.send("Invalid command. Type `!eth`, `!eth <amount>` or `!eth <amount> @ <price>`.");
+			}
 
 		} else {
 
 			return message.channel.send("Invalid command. Type `!eth`, `!eth <amount>` or `!eth <amount> @ <price>`.");
-		};
+		}
 	}
 });
