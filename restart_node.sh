@@ -6,4 +6,4 @@ if [ ! -d log ]; then
   mkdir log
 fi
 
-nodemon .
+pm2 restart 1
