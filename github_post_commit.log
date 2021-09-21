@@ -1,0 +1,16 @@
+Server running at http://*:8080/
+Uncaught exception: Unexpected token u in JSON at position 0
+Trace
+    at process.<anonymous> (C:\users\administrator\documents\github\discord-axie-bot\github_post_commit.js:7:11)
+    at process.emit (node:events:394:28)
+    at process._fatalException (node:internal/process/execution:170:25)
+Uncaught exception: Unexpected token u in JSON at position 0
+Trace
+    at process.<anonymous> (C:\users\administrator\documents\github\discord-axie-bot\github_post_commit.js:7:11)
+    at process.emit (node:events:394:28)
+    at process._fatalException (node:internal/process/execution:170:25)
+Uncaught exception: Unexpected token u in JSON at position 0
+Trace
+    at process.<anonymous> (C:\users\administrator\documents\github\discord-axie-bot\github_post_commit.js:7:11)
+    at process.emit (node:events:394:28)
+    at process._fatalException (node:internal/process/execution:170:25)
