@@ -6,6 +6,7 @@
   "author": "Jet",
   "license": "ISC",
   "dependencies": {
+    "ansi-regex": "^6.0.1",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
     "ether-converter": "^0.0.16",

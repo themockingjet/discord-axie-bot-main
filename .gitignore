@@ -1,5 +1,8 @@
 # Test Files
+api.js
 epoch.js
 register.js
 whois.js
 test.js
+leave.js
+token.js
