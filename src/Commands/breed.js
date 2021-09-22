@@ -41,13 +41,13 @@ module.exports = new Command({
 
 		if (ax1bc > ax2bc) {
 
-			NoofBreed = NoofBreed - ax1bc
+			NoofBreed = NoofBreed - ax1bc;
 		} else if (ax1bc < ax2bc) {
 
-			NoofBreed = NoofBreed - ax2bc
+			NoofBreed = NoofBreed - ax2bc;
 		} else if (ax1bc == ax2bc){
 
-			NoofBreed = NoofBreed - ax1bc
+			NoofBreed = NoofBreed - ax1bc;
 		}
 
 		let slpCost = [
