@@ -16,6 +16,8 @@ module.exports = new Command({
 
 		if (args[1] == args[2]) {
 			message.reply('Error: same axie.');
+		} else if ((!args[1] && !args[2]) || (args.length < 3 || args.length > 3)){
+			message.reply('Error: Invalid command. `!breed <axieID> <axieID>');
 		}
 
 		let axie1 = await fetch(`https://api.axie.technology/getaxies/${args[1]}`).then(res => res.json());
