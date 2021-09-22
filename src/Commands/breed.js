@@ -11,7 +11,7 @@ const convert = require('ether-converter');
 
 module.exports = new Command({
 	name: "breed",
-	description: "Breed Count",
+	description: "Calculate breeding cost and profit.",
 	async run(message, args, client) {
 
 		if (args[1] == args[2]) {
