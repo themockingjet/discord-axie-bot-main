@@ -1,8 +1,10 @@
 # Test Files
-api.js
-epoch.js
-register.js
-whois.js
-test.js
-leave.js
-token.js
+zapi.js
+zepoch.js
+zregister.js
+zwhois.js
+ztest.js
+zleave.js
+ztoken.js
+zbreed.js
+config2.json

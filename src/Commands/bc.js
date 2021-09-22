@@ -8,62 +8,56 @@ module.exports = new Command({
 	name: "bc",
 	description: "Breed Count",
 	async run(message, args, client) {
-		if (!args[1]) return message.channel.send("Invalid command. Type `!bc<space><amount>     #1-7` for more info.");
-		if (isNaN(parseInt(args[1]))) return message.channel.send("Invalid amount. Type `!bc<space><amount>     #1-7` for more info.");
-		if ((parseInt(args[1]) < 1 && parseInt(args[1] > 7))) return message.channel.send("Invalid amount. Type `!bc<space><amount>     #1-7` for more info.");
-		if (args[2]) return message.channel.send("Invalid command. Type `!bc<space><amount>     #1-7` for more info.");
+		
+		/*
+		Table Config
+		*/
+		var data = [
+			["", "Breed Count 1", "Breed Count 2", "Breed Count 3", "Breed Count 4", "Breed Count 5", "Breed Count 6", "Breed Count 7"],          
+			["SLP", "300", "600", "1800", "3300", "5700", "9600", "15900"],
+			["AXS", "2", "4", "6", "8", "10", "12", "14"]
+		];
 
-		let bslp = 0;
-		let baxs = 0;
-		let count = parseInt(args[1]);
+		const config = {
+			columns: [
+			  { alignment: 'center' },
+			  { alignment: 'center' },
+			  { alignment: 'center' },
+			  { alignment: 'center' },
+			  { alignment: 'center' },
+			  { alignment: 'center' },
+			  { alignment: 'center' },
+			  { alignment: 'center' }
+			],
+		  };
 
-		switch(count) {
-			case 1:
-				bslp = 300;
-				baxs = 2;
-				break;
-			case 2:
-				bslp = 900;
-				baxs = 4;
-				break;
-			case 3:
-				bslp = 1800;
-				baxs = 6;
-				break;
-			case 4:
-				bslp = 3300;
-				baxs = 8;
-				break;
-			case 5:
-				bslp = 5700;
-				baxs = 10;
-				break;
-			case 6:
-				bslp = 9600;
-				baxs = 12;
-				break;
-			case 7:
-				bslp = 15900;
-				baxs = 14;
-				break;
-		}
-
-		const aaxs = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_currencies=php')
-						.then(res => res.json())
-						.then(body => body['axie-infinity'].php.toFixed(2));
+		/*
+		Execute command
+		*/
+		
+		if(args.length <= 1) {
 			
-		const aslp = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=php')
-						.then(res => res.json())
-						.then(body => body['smooth-love-potion'].php.toFixed(2));
+			//get token data
+			let dtToken = await tokenModel.find({ 
+				tokenID: { $in: ['smooth-love-potion',	'axie-infinity']}
+			});
 
-		var sslp = await (bslp * aslp).toFixed(2);
-		var saxs = await (baxs * aaxs).toFixed(2);
+			//axs
+			let axsprc = dtToken[0].php;
 
-		let total = await parseFloat(sslp) + parseFloat(saxs);
-		total = total.toFixed(2);
+			//slp
+			let slpprc = dtToken[1].php;
+			let ttlArr = ['PHP'];
 
-		message.reply(`\`AXS\` **${baxs}** => \`PHP\` **${saxs}**\n\`SLP\` **${bslp}** => \`PHP\` **${sslp}**` 
-					 +`\n\nTotal \`PHP\` => **${total}**`);
+			for(let i = 1; i < 8; i++) {
+				ttlArr[i] = fix.toDecimal((slpprc * data[1][i]) + (axsprc * data[2][i]))
+			}
+
+			data[3] = ttlArr;
+			message.channel.send(`\`\`\`cs\n${table(data, config)}\`\`\``)
+			// console.table(data);
+			// console.log(data.toString());
+		}
 		
 	}
 });
