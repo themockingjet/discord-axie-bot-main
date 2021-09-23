@@ -34,4 +34,4 @@ http.createServer( function( request, response ) {
   }
 }).listen( 8080 );
 
-console.log( 'Server running at http://*:8080/' );
+console.log( 'Server running at http://*:8080/' + Date.now());

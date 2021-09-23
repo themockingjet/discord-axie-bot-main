@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/bin/node
 
 git pull
 
