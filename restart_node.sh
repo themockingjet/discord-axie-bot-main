@@ -2,4 +2,4 @@
 
 git pull
 
-pm2 restart 1
+pm2 start 0
