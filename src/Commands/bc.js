@@ -2,7 +2,9 @@
 //
 //
 const Command = require("../Structures/Command.js");
-const fetch = require('node-fetch');
+const fix = require('../Functions/numLocaleString.js');
+const tokenModel = require('../Models/tokenSchema');
+const { table } = require('table');
 
 module.exports = new Command({
 	name: "bc",
@@ -14,8 +16,8 @@ module.exports = new Command({
 		*/
 		var data = [
 			["", "Breed Count 1", "Breed Count 2", "Breed Count 3", "Breed Count 4", "Breed Count 5", "Breed Count 6", "Breed Count 7"],          
-			["SLP", "300", "600", "1800", "3300", "5700", "9600", "15900"],
-			["AXS", "2", "4", "6", "8", "10", "12", "14"]
+			["SLP", "600", "1500", "3000", "5400", "9300", "15600", "25800"],
+			["AXS", "1", "2", "3", "4", "5", "6", "7"]
 		];
 
 		const config = {
@@ -55,8 +57,6 @@ module.exports = new Command({
 
 			data[3] = ttlArr;
 			message.channel.send(`\`\`\`cs\n${table(data, config)}\`\`\``)
-			// console.table(data);
-			// console.log(data.toString());
 		}
 		
 	}
