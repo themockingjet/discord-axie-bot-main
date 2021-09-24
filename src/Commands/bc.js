@@ -14,7 +14,7 @@ module.exports = new Command({
 		/*
 		Table Config
 		*/
-		if(args.length < 1) {
+		if(args.length < 2) {
 			var data = [
 				["", "Breed Count 1", "Breed Count 2", "Breed Count 3", "Breed Count 4", "Breed Count 5", "Breed Count 6", "Breed Count 7"],          
 				["SLP", "600", "1500", "3000", "5400", "9300", "15600", "25800"],
