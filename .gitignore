@@ -7,4 +7,5 @@ ztest.js
 zleave.js
 ztoken.js
 zbreed.js
-config2.json
+zapiauth.js
+configtest.json
