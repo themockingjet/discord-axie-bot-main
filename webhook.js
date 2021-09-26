@@ -9,7 +9,7 @@ process.on( "uncaughtException", function( error ) {
 
 var last_payload = {};
 
-http.createServer( function( request, response ) {
+http.createServer( ( request, response ) => {
   if( request.method == 'GET' ) {
     response.writeHead( 200, {'Content-Type': 'text/html'} );
     response.write( "<html><body><pre>" );
@@ -18,15 +18,15 @@ http.createServer( function( request, response ) {
     response.end();
   } else {
     var body = '';
-    request.on( 'data', function( chunk ) {
+    request.on( 'data', ( chunk ) => {
       body += chunk.toString();
     });
 
-    request.on( 'end', function() {
+    request.on( 'end', () => {
       last_payload = JSON.parse( body );
       console.log( new Date(), request.method, request.url, last_payload );
 
-      exec( "restart_node.sh", function( error, stdout, stderr ) {
+      exec( "restart_node.sh", ( error, stdout, stderr ) => {
         response.writeHead( 200, {'Content-Type': 'text/plain'} );
         response.end( error ? stderr : stdout );
       });
