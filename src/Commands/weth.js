@@ -24,6 +24,7 @@ module.exports = new Command({
 				!weth <amount>
 				*/	
 				let tokenNum = parseFloat(args[1].replace(/,/g, ''));
+				let tokenNum = parseFloat(args[1].replace(/,/g, ''));
 				if(!isNaN(tokenNum)) {
 					
 					let result = await tokenModel.findOne({

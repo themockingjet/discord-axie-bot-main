@@ -40,6 +40,7 @@ module.exports = new Command({
 				/*
 				!eth <amount> @ <price> 
 				*/
+				let tokenNum = parseFloat(args[1].replace(/,/g, ''));
 				let tokenPrc = parseFloat(args[3].replace(/,/g, ''))
 
 				if(!isNaN(tokenNum) && !isNaN(tokenPrc) && args[2] == '@') {
