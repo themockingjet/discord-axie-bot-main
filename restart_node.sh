@@ -1,12 +1,14 @@
 #!/bin/sh
 
-echo "\n\nPulling files from the repo.\n"
+echo "Pulling files from the repo."
 git pull
 
-echo "\n\n==================================\n"
+echo ""
+echo "=================================="
 echo "Restarting node...\n"
 pm2 restart 1
 
-echo "\n\n==================================\n"
+echo ""
+echo "=================================="
 echo "Exiting..."
 exit 0
