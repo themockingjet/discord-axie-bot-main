@@ -13,7 +13,6 @@ module.exports = new Event("ready", client => {
 			channel.send(`${client.user} is online.`)
 		})
 
-
 	fetchTokens();
 
 	setInterval(() => {
