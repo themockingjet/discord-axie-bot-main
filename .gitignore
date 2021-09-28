@@ -8,5 +8,11 @@ zleave.js
 ztoken.js
 zbreed.js
 zapiauth.js
-config.test.json
-config.orig.json
+
+# Config Files
+config.test
+config.orig
+
+# Events Files
+ready.orig
+ready.test
