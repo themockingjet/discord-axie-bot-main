@@ -6,7 +6,7 @@ git pull
 echo ""
 echo "=================================="
 echo "Restarting bot..."
-node webhook.js
+node discord_web.js
 
 echo ""
 echo "=================================="
