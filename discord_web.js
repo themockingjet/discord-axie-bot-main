@@ -4,7 +4,7 @@ const hook = new Webhook("https://discord.com/api/webhooks/892511642548592680/IA
 (async () => {
     try {
         await hook.send('Restarting bot...');
-        console.log('Successfully sent webhook!');
+        console.log('Successfully sent webhook!\n');
     }
     catch(e){
         console.log(e.message);
