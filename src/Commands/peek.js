@@ -21,105 +21,7 @@ module.exports = new Command({
 			minute: 60 * 1000,
 			second: 1000
 		}
-		var htmlCode = `<!DOCTYPE html>
-		<html dir="ltr" lang="en" class="">
-		<head>
-			<meta charset="utf-8">
-			<style>
-				body { 
-					background-color: transparent;
-				}
-				div.a {
-					display: inline-block;
-					width: 300px;
-					height: 300px;
-				}
-				
-				div.b {
-					display: inline-block;
-					width: 400px;
-					height: 300px;
-				}
-				th {
-					color: #000000;
-				}
-				th, td {
-					font-family: verdana;
-					font-size: 20px;
-					font-weight: bold;
-					padding: 3px;
-				}
-				#aquatic {
-					color:#01B1C7;
-				}
-				#beast {
-					color:#FFB812;
-				}
-				#bug {
-					color:#B4433C;
-				}
-				#reptile {
-					color:#C88AE0;
-				}
-				#plant {
-					color:#60A808;
-				}
-				#bird {
-					color:#FF8BBD;
-				}
-				table > 
-			</style>
-		</head>
-		<body>
-		<div class="a">
-			<img src="https://storage.googleapis.com/assets.axieinfinity.com/axies/5345871/axie/axie-full-transparent.png" 
-				 alt=""
-				 style="height: 100%; width: 100%; object-fit: contain;">
-		</div>
-		<div class="b">
-			<table>
-				<tr>
-				  <th>D</th>
-				  <th>R1</th>
-				  <th>R2</th>
-				</tr>
-				<tr>
-					<td id="{{ceD}}">{{eyesD}}</td>
-					<td id="{{ceR1}}">{{eyesR1}}</td>
-					<td id="{{ceR2}}">{{eyesR2}}</td>
-				</tr>
-				<tr>
-					<td id="{{ceaD}}">{{earsR1}}</td>
-					<td id="{{ceaR1}}">{{earsR2}}</td>
-					<td id="{{ceaR2}}">{{earsD}}</td>
-				</tr>
-				<tr>
-					<td id="{{cmD}}">{{mouthD}}</td>
-					<td id="{{cmR1}}">{{mouthR1}}</td>
-					<td id="{{cmR2}}">{{mouthR2}}</td>
-				</tr>
-				<tr>
-					<td id="{{chD}}">{{hornD}}</td>
-					<td id="{{chR1}}">{{hornR1}}</td>
-					<td id="{{chR2}}">{{hornR2}}</td>
-				</tr>
-				<tr>
-					<td id="{{cbD}}">{{backD}}</td>
-					<td id="{{cbR1}}">{{backR1}}</td>
-					<td id="{{cbR2}}">{{backR2}}</td>
-				</tr>
-				<tr>
-					<td id="{{ctD}}">{{tailD}}</td>
-					<td id="{{ctR1}}">{{tailR1}}</td>
-					<td id="{{ctR2}}">{{tailR2}}</td>
-				</tr>
-			</table>
-		</div>
-			
-		
-		
-		</body>
-		</html>`
+
 		var rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
 
 		var getRelativeTime = (d1, d2 = new Date()) => {
@@ -134,13 +36,117 @@ module.exports = new Command({
 			return message.channel.send("Please the axies id you want to peek. `!peek 100001`")
 		} else {
 			
+			const axieId = args[1].toString();
+
+			var htmlCode = `<!DOCTYPE html>
+			<html dir="ltr" lang="en" class="">
+			<head>
+				<meta charset="utf-8">
+				<style>
+					body { 
+						background-color: transparent;
+					}
+					div.a {
+						display: inline-block;
+						width: 300px;
+						height: 300px;
+					}
+					
+					div.b {
+						display: inline-block;
+						width: 400px;
+						height: 300px;
+					}
+					th {
+						color: #000000;
+					}
+					th, td {
+						font-family: verdana;
+						font-size: 20px;
+						font-weight: bold;
+						padding: 3px;
+					}
+					#aquatic {
+						color:#01B1C7;
+					}
+					#beast {
+						color:#FFB812;
+					}
+					#bug {
+						color:#B4433C;
+					}
+					#reptile {
+						color:#C88AE0;
+					}
+					#plant {
+						color:#60A808;
+					}
+					#bird {
+						color:#FF8BBD;
+					}
+					table > 
+				</style>
+			</head>
+			<body>
+			<div class="a">
+				<img src="https://storage.googleapis.com/assets.axieinfinity.com/axies/${axieId}/axie/axie-full-transparent.png" 
+					 alt=""
+					 style="height: 100%; width: 100%; object-fit: contain;">
+			</div>
+			<div class="b">
+				<table>
+					<tr>
+					  <th>D</th>
+					  <th>R1</th>
+					  <th>R2</th>
+					</tr>
+					<tr>
+						<td id="{{ceD}}">{{eyesD}}</td>
+						<td id="{{ceR1}}">{{eyesR1}}</td>
+						<td id="{{ceR2}}">{{eyesR2}}</td>
+					</tr>
+					<tr>
+						<td id="{{ceaD}}">{{earsR1}}</td>
+						<td id="{{ceaR1}}">{{earsR2}}</td>
+						<td id="{{ceaR2}}">{{earsD}}</td>
+					</tr>
+					<tr>
+						<td id="{{cmD}}">{{mouthD}}</td>
+						<td id="{{cmR1}}">{{mouthR1}}</td>
+						<td id="{{cmR2}}">{{mouthR2}}</td>
+					</tr>
+					<tr>
+						<td id="{{chD}}">{{hornD}}</td>
+						<td id="{{chR1}}">{{hornR1}}</td>
+						<td id="{{chR2}}">{{hornR2}}</td>
+					</tr>
+					<tr>
+						<td id="{{cbD}}">{{backD}}</td>
+						<td id="{{cbR1}}">{{backR1}}</td>
+						<td id="{{cbR2}}">{{backR2}}</td>
+					</tr>
+					<tr>
+						<td id="{{ctD}}">{{tailD}}</td>
+						<td id="{{ctR1}}">{{tailR1}}</td>
+						<td id="{{ctR2}}">{{tailR2}}</td>
+					</tr>
+				</table>
+			</div>
+				
+			
+			
+			</body>
+			</html>`
+
 			const axieGene = await fetch(`https://api.axie.technology/getgenes/${args[1]}`)
 			.then(res => res.json());
 
 			const axieStats = await fetch(`https://api.axie.technology/getaxies/${args[1]}`)
 			.then(res => res.json());
 			
-			const axieId = args[1].toString();
+			if(axieStats == null) {
+				message.reply(`Axie with id: ${axieId} not found.`)
+			}
 
 			const query = `query GetAxieDetail($axieId: ID!) {
 				axie(axieId: $axieId) {
@@ -263,30 +269,6 @@ module.exports = new Command({
 				__typename
 			  }`;
 
-			const axGraph = await fetch('https://axieinfinity.com/graphql-server-v2/graphql', {
-									method: 'POST',
-									headers: {
-									'Content-Type': 'application/json',
-									'Accept': 'application/json',
-									},
-									body: JSON.stringify({
-										"operationName": "GetAxieDetail",
-										"variables": {
-										"axieId": axieId
-										},
-										query
-									})
-								})
-								.then(r => r.json())
-								// ${axieGene.eyes.d.name} [${axieGene.eyes.d.class.substr(0,1)}]
-			// const geneImg = router.get(`/api/tweet/render`, async function(req, res) {
-			// 	const image = await nodeHtmlToImage({
-			// 	html: '<html><body><div>Check out what I just did! #cool</div></body></html>'
-			// 	});
-			// 	res.writeHead(200, { 'Content-Type': 'image/png' });
-			// 	res.end(image, 'binary');
-			// });
-
 			const geneImg = await nodeHtmlToImage({
 					html: htmlCode,
 					type: 'png',
@@ -331,18 +313,17 @@ module.exports = new Command({
 					}
 				})
 			const file = new MessageAttachment(geneImg, 'axie.png')
-			//embed
+			
 			const embed = new MessageEmbed()
 				.setColor('#FFFFFF')
-				.setTitle(`${args[1]}`)
+				.setTitle(`${args[1]} - ${axieStats.class}`)
 				.setURL(`https://marketplace.axieinfinity.com/axie/${args[1]}`)
 				.addFields(
-					{ name: 'Class: ', value: `${axieStats.class}`, inline: true },
 					{ name: 'Breed Count:', value: `${axieStats.breedCount}/7`, inline: true }
 				)
 
 			//auction price
-			const axAuction = axGraph.data.axie.auction;
+			const axAuction = axieStats.auction;
 			
 			if(axAuction != null) {
 				var startingPrice = convert(axAuction.startingPrice, 'wei', 'ether')
