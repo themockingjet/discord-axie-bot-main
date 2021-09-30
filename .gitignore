@@ -16,3 +16,6 @@ config.orig
 # Events Files
 ready.orig
 ready.test
+
+# node module
+node_modules/
