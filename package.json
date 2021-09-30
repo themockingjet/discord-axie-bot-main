@@ -6,6 +6,7 @@
   "author": "Jet",
   "license": "ISC",
   "dependencies": {
+    "discord-webhook-node": "^1.1.8",
     "discord.js": "^13.1.0",
     "ether-converter": "^0.0.16",
     "graphql": "^15.5.2",
