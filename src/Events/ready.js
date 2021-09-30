@@ -8,7 +8,7 @@ const tokenModel = require('../Models/tokenSchema');
 module.exports = new Event("ready", client => {
 	console.log("Bot is ready!");
 	
-	client.channels.fetch('862794964772716595')
+	client.channels.fetch('892482366596071425')
 		.then(channel => {
 			channel.send(`${client.user} is online.`)
 		})
