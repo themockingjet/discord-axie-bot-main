@@ -145,7 +145,11 @@ module.exports = new Command({
 			.then(res => res.json());
 			
 			if(axieStats == null) {
-				message.reply(`Axie with id: ${axieId} not found.`)
+				message.reply(`Error: Axie: ${axieId} not found.`)
+				return
+			} else if (axieStats.bodyShape == null) {
+				message.reply(`Error: Axie: ${axieId} is an egg.`)
+				return
 			}
 
 			const query = `query GetAxieDetail($axieId: ID!) {
