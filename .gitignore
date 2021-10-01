@@ -1,13 +1,5 @@
 # Test Files
-zapi.js
-zepoch.js
-zregister.js
-zwhois.js
-ztest.js
-zleave.js
-ztoken.js
-zbreed.js
-zapiauth.js
+/src/commands/z*.js
 
 # Config Files
 config.test
@@ -16,6 +8,10 @@ config.orig
 # Events Files
 ready.orig
 ready.test
+
+# Models Files
+/src/models/*.js
+!/src/models/tokenSchema.js
 
 # node module
 /node_modules/
