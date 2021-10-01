@@ -57,9 +57,10 @@ module.exports = new Command({
 	
 				//slp
 				let slpprc = dtToken[1].php;
+				slCost = 0;
 				for (let x = 1; x < data[0].length; x++) {
-					// horizontal
-					data[1][x] = (resSlp[x-1] * 2);
+					slCost +=  (resSlp[x-1] * 2)
+					data[1][x] = slCost;
 					data[2][x] = `${x}`; 
 				}
 
