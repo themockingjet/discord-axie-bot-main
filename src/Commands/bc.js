@@ -74,7 +74,8 @@ module.exports = new Command({
 			} else if (args.length == 3 && ((args[0] == "sbc" || args[0] == "setbreedcount") && args[1] == "slp")) {
 				
 				if (message.author.id != config.adminId) {
-					message.channel.send(`Error: No permission.`)
+					message.channel.send(`Error: No permission.`);
+					return;
 				}
 
 				let nbc = args[2].split(",");
@@ -108,7 +109,8 @@ module.exports = new Command({
 			} else if (args.length == 3 && ((args[0] == "sbc" || args[0] == "setbreedcost") && args[1] == "axs")) {
 
 				if (message.author.id != config.adminId) {
-					message.channel.send(`Error: No permission.`)
+					message.channel.send(`Error: No permission.`);
+					return;
 				}
 
 				let nbc = args[2];
@@ -120,7 +122,7 @@ module.exports = new Command({
 				);
 
 				message.channel.send(`Axs cost updated successfully`);
-			} else if (args.length == 2) {
+			} else if (args.length == 2 && args[0] != "sbc") {
 
 				let brdcnt = args[1].split(",");
 
@@ -137,7 +139,7 @@ module.exports = new Command({
 				let breeds = 0;
 				let bc1 = brdcnt[0];
 				let bc2 = brdcnt[1];
-				
+
 				if (bc1 > bc2) {
 					breeds = 7 - bc1;
 				} else if (bc1 < bc2) {
