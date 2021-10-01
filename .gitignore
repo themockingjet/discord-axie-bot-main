@@ -11,6 +11,7 @@ ready.test
 
 # Models Files
 /src/models/*.js
+!/src/models/breedcostSchema.js
 !/src/models/tokenSchema.js
 
 # node module
