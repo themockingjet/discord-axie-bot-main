@@ -2,12 +2,11 @@
 //
 //
 const Command = require("../Structures/Command.js");
-const fix = require('../Functions/numLocaleString.js');
+const fix = require('../Functions/textFunctions.js');
 const tokenModel = require('../Models/tokenSchema');
 const breedcostModel = require('../Models/breedcostSchema');
 const { table } = require('table');
 const config = require("../Data/config.json"); 
-const { assertDirective } = require("graphql");
 
 module.exports = new Command({
 	name: "breedCount",

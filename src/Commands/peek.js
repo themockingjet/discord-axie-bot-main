@@ -6,31 +6,13 @@ const fetch = require('node-fetch');
 const { MessageAttachment,MessageEmbed } = require("discord.js");
 const convert = require('ether-converter');
 const nodeHtmlToImage = require('node-html-to-image');
+const fixTime = require("../Functions/timeFunctions");
 
 module.exports = new Command({
 	name: "peek",
 	aliases: ["p"],
 	description: "Peek axie genes.",
 	async run(message, args, client, member) {
-
-		var units = {
-			year  : 24 * 60 * 60 * 1000 * 365,
-			month : 24 * 60 * 60 * 1000 * 365/12,
-			day   : 24 * 60 * 60 * 1000,
-			hour  : 60 * 60 * 1000,
-			minute: 60 * 1000,
-			second: 1000
-		}
-
-		var rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
-
-		var getRelativeTime = (d1, d2 = new Date()) => {
-			var elapsed = d1 - d2
-			// "Math.abs" accounts for both "past" & "future" scenarios
-			for (var u in units) 
-			  if (Math.abs(elapsed) > units[u] || u == 'second') 
-				return rtf.format(Math.round(elapsed/units[u]), u)
-		}
 		
 		if (!args[1] && isNaN(parseInt(args[1]))) {
 			return message.channel.send("Please the axies id you want to peek. `!peek 100001`")
@@ -302,12 +284,12 @@ module.exports = new Command({
 						chR1: axieGene.horn.r1.class,
 						hornR2: axieGene.horn.r2.name,
 						chR2: axieGene.horn.r2.class,
-						backD: axieGene.eyes.d.name,
-						cbD: axieGene.eyes.d.class,
-						backR1: axieGene.eyes.r1.name,
-						cbR1: axieGene.eyes.r1.class,
-						backR2: axieGene.eyes.r2.name,
-						cbR2: axieGene.eyes.r2.class,
+						backD: axieGene.back.d.name,
+						cbD: axieGene.back.d.class,
+						backR1: axieGene.back.r1.name,
+						cbR1: axieGene.back.r1.class,
+						backR2: axieGene.back.r2.name,
+						cbR2: axieGene.back.r2.class,
 						tailD: axieGene.tail.d.name,
 						ctD: axieGene.tail.d.class,
 						tailR1: axieGene.tail.r1.name,
@@ -332,7 +314,7 @@ module.exports = new Command({
 			if(axAuction != null) {
 				var startingPrice = convert(axAuction.startingPrice, 'wei', 'ether')
 				var endingPrice = convert(axAuction.endingPrice, 'wei', 'ether')
-				var endTime = getRelativeTime(+new Date(axAuction.endingTimestamp * 1000))
+				var endTime = fixTime.getRelativeTime(+new Date(axAuction.endingTimestamp * 1000))
 				//console.log(startingPrice)
 				embed.addField('Price', `${startingPrice} ▶ ${endingPrice} 🕛 ${endTime}`, true )
 			} else {

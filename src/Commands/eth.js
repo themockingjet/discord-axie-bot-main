@@ -2,7 +2,7 @@
 //
 //
 const Command = require("../Structures/Command.js");
-const fix = require('../Functions/numLocaleString.js');
+const fix = require('../Functions/textFunctions.js');
 const tokenModel = require('../Models/tokenSchema');
 
 module.exports = new Command({

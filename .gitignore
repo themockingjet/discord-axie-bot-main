@@ -14,5 +14,11 @@ ready.test
 !/src/models/breedcostSchema.js
 !/src/models/tokenSchema.js
 
+# Functions Files
+/src/functions/*.js
+!/src/functions/findaxie.js
+!/src/functions/numLocaleString.js
+!/src/functions/relativeTime.js
+
 # node module
 /node_modules/
