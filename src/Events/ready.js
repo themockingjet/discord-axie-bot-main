@@ -3,7 +3,7 @@
 //
 const Event = require("../Structures/Event.js");
 const fetch = require('node-fetch');
-const tokens = require('../Functions/fetchTokens');
+const tokens = require('../Functions/tokenFunctions');
 const tokenModel = require('../Models/tokenSchema');
 
 module.exports = new Event("ready", client => {
