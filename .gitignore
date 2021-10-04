@@ -17,8 +17,9 @@ ready.test
 # Functions Files
 /src/functions/*.js
 !/src/functions/findaxie.js
-!/src/functions/numLocaleString.js
-!/src/functions/relativeTime.js
+!/src/functions/textFunctions.js
+!/src/functions/timeFunctions.js
+!/src/functions/tokenFunctions.js
 
 # node module
 /node_modules/
