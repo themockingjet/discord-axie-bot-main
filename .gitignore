@@ -13,6 +13,7 @@ ready.test
 /src/models/*.js
 !/src/models/breedcostSchema.js
 !/src/models/tokenSchema.js
+!/src/models/alertTokenSchema.js
 
 # Functions Files
 /src/functions/*.js
